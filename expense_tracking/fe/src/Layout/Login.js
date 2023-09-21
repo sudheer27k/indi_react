@@ -112,7 +112,7 @@ function Login() {
                   type="submit"
                 >
                   <span className="button__text">Log in Now</span>
-                  <i className="button__icon fas fa-chevron-right"></i>
+                  {/* <i className="button__icon fas fa-chevron-right"></i> */}
                 </button>
               </div>
             </form>
@@ -123,7 +123,7 @@ function Login() {
                   className="button signup__submit"
                   onClick={() => navigate("/signup")}
                 >
-                  <i className="button__icon_left fas fa-chevron-left"></i>
+                  {/* <i className="button__icon_left fas fa-chevron-left"></i> */}
                   <span className="button__text">Sign up now</span>
                 </button>
               </div>

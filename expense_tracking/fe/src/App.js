@@ -4,7 +4,7 @@ import Login from "./Layout/Login";
 import Signup from "./Layout/Signup";
 import Dashboard from "./Layout/Dashboard";
 // import Profile from "./Layout/Profile";
-// import EventLayout from "./Layout/EventLayout";
+import ExpenseLayout from "./Layout/Expenselayout";
 // import Fileupload from "./Component/ProfileHandling/Fileupload";
 // import AdminDashboard from "./Layout/Admin/AdminDashboard";
 // import AdminProfile from "./Layout/Admin/AdminProfile";
@@ -17,8 +17,8 @@ function App() {
         <Route path="/" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/expenses" element={<ExpenseLayout />} />
         {/* <Route path="/profile" element={<Profile />} />
-        <Route path="/events" element={<EventLayout />} />
         <Route path="/upload" element={<Fileupload />} />
         <Route path="/admin" element={<AdminDashboard />} />
         <Route path="/per" element={<PerformanceRating />} />

@@ -1,4 +1,4 @@
-.container-ls {
+/* .container-ls {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -112,11 +112,10 @@
   width: 320px;
   padding: 30px;
   padding-top: 30px;
-}
+} */
 
-.login__field,
+/* .login__field,
 .signup__field {
-  /* padding: 10px 0px; */
   position: relative;
   height: 80px;
 }
@@ -157,7 +156,6 @@
 .signup-submit-div-signup {
   display: flex;
   justify-content: flex-end;
-  /* margin-top: 5px; */
   margin-right: -18px;
 }
 .login-submit-div {
@@ -178,7 +176,6 @@
   align-items: center;
   width: 180px;
   color: #4c489d;
-  /* box-shadow: 0px 2px 2px #5c5696; */
   box-shadow: 1px 1px 5px 4px #5c5696;
   cursor: pointer;
   transition: 0.2s;
@@ -237,4 +234,170 @@
 }
 .separation {
   margin-bottom: 20px;
+} */
+
+.container-ls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  min-height: 100vh;
+}
+
+.screen {
+  background: linear-gradient(90deg, #5d54a4, #7c78b8);
+  position: relative;
+  height: 570px;
+  box-shadow: 0px 0px 24px #5c5696;
+}
+
+.screen__content {
+  z-index: 1;
+  position: relative;
+  height: 100%;
+}
+
+/* Increase form size */
+.login{
+  width: 400px; /* Adjust the width to make the form bigger */
+  padding: 30px;
+  padding-top: 30px; /* Adjust padding for vertical alignment */
+  text-align: center; /* Center the form elements */
+}
+
+
+.Signup {
+  width: 400px; /* Adjust the width to make the form bigger */
+  padding: 30px 30px 0px 30px;
+  padding-top: 30px; /* Adjust padding for vertical alignment */
+  text-align: center; /* Center the form elements */
+}
+
+/* Common styles for login and signup fields */
+.login__field,
+.signup__field {
+  position: relative;
+  height: 80px;
+  margin-bottom: 10px;
+   /* Added margin for spacing between fields */
+  text-align: left; /* Align text to the left within fields */
+}
+
+.login__icon,
+.signup__icon {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 10px; /* Adjust the left spacing of icons */
+  /* color: var(--button-color1); */
+}
+
+.login__input,
+.signup__input {
+  border: none;
+  border-bottom: 2px solid #d1d1d4;
+  background: none;
+  padding: 10px;
+  padding-left: 40px; /* Adjust the left padding of inputs */
+  font-weight: 700;
+  width: 75%;
+  transition: 0.2s;
+  margin-left: 30px; /* Added margin to center the input fields */
+}
+
+.login__input:active,
+.signup__input:active,
+.login__input:focus,
+.signup__input:focus,
+.login__input:hover,
+.signup__input:hover {
+  outline: none;
+  border-bottom-color: #6a679e;
+}
+
+/* Styling for the "eye" icons */
+.eye-icon {
+  position: absolute;
+  cursor: pointer;
+  right: 10px; /* Adjust the right spacing of icons */
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--button-color1);
+}
+
+/* Styling for the error messages */
+.error {
+  color: rgb(190, 55, 55);
+  border-radius: 10px;
+  padding: 5px;
+  font-size: 12px;
+  text-align: left; /* Align error messages to the left */
+}
+
+/* Button styles with color changes */
+.signup-submit-div,
+.signup-submit-div-signup,
+.login-submit-div {
+  display: flex;
+  justify-content: center; /* Center align the buttons */
+  /* margin-top: 20px; */
+   /* Added margin to space buttons from fields */
+}
+
+.signup__submit,
+.login__now__button,
+.login__submit {
+  background: #4c489d; /* Change background color */
+  font-size: 16px; /* Increase font size */
+  padding: 16px 20px;
+  border-radius: 26px;
+  border: none; /* Remove border */
+  text-transform: uppercase;
+  font-weight: 700;
+  /* display: flex; */
+  align-items: center;
+  width: 180px;
+  color: #fff; /* Change text color to white */
+  box-shadow: 1px 1px 5px 4px #5c5696;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.signup__submit:hover,
+.login__now__button:hover,
+.login__submit:hover {
+  background: #6a679e; /* Change button color on hover */
+}
+
+.button__icon {
+  font-size: 24px;
+  margin-left: auto;
+  color: var(--button-color1);
+}
+
+.button__icon_left {
+  font-size: 24px;
+  margin-right: auto;
+  color: var(--button-color1);
+}
+
+.text-info-ls {
+  color: white;
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+.password-error {
+  width: 250px;
+}
+
+.separation {
+  margin-bottom: 20px;
+}
+
+/* Adjust the margin for login-now button */
+.login-button-signup-page {
+  margin-top: 20px; /* Adjust the top margin to keep it within the form */
+  margin-left: auto; /* Align to the right within the form */
+  margin-right: auto; /* Align to the right within the form */
 }

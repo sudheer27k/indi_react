@@ -1,0 +1,6 @@
+.dashboard-div {
+    display: flex;
+    gap: 10px;
+    height: 200px;
+    margin-left: 10px;
+  }

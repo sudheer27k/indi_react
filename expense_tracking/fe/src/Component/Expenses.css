@@ -1,0 +1,113 @@
+/* Base styles for larger screens */
+.head {
+    font-size: 40px;
+    color: #19105b;
+    margin-left: 230px;
+    margin-top: 40px;
+    font-weight: 620;
+    font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  }
+  
+  /* .col-10 {
+      padding-left: 120px;
+      padding-top: 10px;
+  } */
+  
+  /* .container {
+    margin-left: 110px;
+  } */
+  
+  /* .project-alloc-h6 {
+    background-color: #19105b;
+    cursor: pointer;
+  }
+  
+  .project-alloc-table thead tr,
+  .project-alloc-table tbody tr {
+    background-color: #e8b5dc;
+  }
+  .project-alloc-drop-down-table {
+    overflow-x: auto;
+  }
+  .dropdown-table th {
+    color: #200580;
+    background-color: #ffe5ee;
+  }
+  .btn {
+    background-color: #e91e63;
+  }
+  .form-group:not(:last-child) {
+    margin-bottom: 25px;
+  } */
+  
+  /* Responsive styles for smaller screens */
+  /* @media (max-width: 768px) {
+    .head {
+      font-size: 30px; */
+      /* margin-left: 10px; */
+    /* }
+  
+    .project-alloc-h6 {
+      font-size: 24px; */
+      /* margin-left: 10px; */
+    /* }
+  
+    .table {
+      font-size: 14px;
+    }
+   */
+    /* You can adjust other styles as needed for smaller screens */
+  /* } */
+
+  /* Expenses.css */
+.container {
+    max-width: 100%;
+    padding: 0 15px;
+    margin: 0 auto;
+    margin-left: 5%;
+  }
+  
+  h1 {
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+  
+  th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+  }
+  
+  tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+  
+  .btn-primary {
+    margin-top: 20px;
+  }
+  
+  .modal-dialog {
+    max-width: 600px;
+    margin: 30px auto;
+  }
+  
+  .modal-body label {
+    font-weight: bold;
+  }
+  
+  @media (max-width: 768px) {
+    h1 {
+      font-size: 24px;
+    }
+  
+    table {
+      font-size: 14px;
+    }
+  }
+  
