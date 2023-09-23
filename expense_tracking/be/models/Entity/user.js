@@ -13,10 +13,10 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       unique: true,
     },
-    role: {
-      type: DataTypes.STRING,
-      defaultValue: "user",
-    },
+    // role: {
+    //   type: DataTypes.STRING,
+    //   defaultValue: "user",
+    // },
   });
 
   return User;

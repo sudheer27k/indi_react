@@ -10,8 +10,6 @@ function Expenses() {
     console.log("New Expense:",newExpense.date)
     setExpenses([...expenses, newExpense]);
   };
-  
-
   return (
     <div className="container">
       <h2>Expenses</h2>
