@@ -7,7 +7,7 @@ function Expenses() {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleAddExpense = (newExpense) => {
-    console.log("New Expense:",newExpense)
+    console.log("New Expense:",newExpense.date)
     setExpenses([...expenses, newExpense]);
   };
   
