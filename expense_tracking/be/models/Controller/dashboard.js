@@ -1,7 +1,9 @@
-// const db = require("../Entity");
+const db = require("../Entity");
+const expense = db.expenses;
+
 // const upComingEvents = db.upcomingEvents;
 // const publicHolidays = db.publicHoliday;
-// const performance = db.performance;
+
 // const project = db.project;
 // const manager = db.manager;
 
@@ -17,18 +19,35 @@
 //     res.status(500).send({ statusCode: 400, message: "Internal error" });
 //   }
 // };
-// const getAllProject = async (req, res) => {
-//   try {
-//     let getProject = await project.findAll();
-//     if (getProject) {
-//       res.send({ statusCode: 200, getProject });
-//     } else {
-//       res.status(400).send({ statusCode: 400, message: "No data" });
-//     }
-//   } catch (error) {
-//     res.status(500).send({ statusCode: 400, message: "Internal error" });
-//   }
-// };
+
+
+const getAllExpense = async (req, res) => {
+  try {
+    let getExpense = await expense.findAll();
+    if (getExpense) {
+        console.log(getExpense)
+      res.send({ statusCode: 200, getExpense });
+    } else {
+      res.status(400).send({ statusCode: 400, message: "No data" });
+    }
+  } catch (error) {
+    res.status(500).send({ statusCode: 400, message: "Internal error" });
+  }
+};
+
+const createExpense = async (req, res) => {
+  try{
+  console.log("data",req.body)
+  let createNewExpense = await expense.create(req.body);
+  res.status(200).send({ message: "Expense created" });
+} catch (error) {
+  res.status(400).send({ message: "Internal error" });
+}
+};
+
+
+
+
 // const getEventByDate = async (req, res) => {
 //   const date = new Date().toISOString().split("T")[0];
 //   try {
@@ -190,30 +209,7 @@
 //     res.status(500).send({ message: "Internal error" });
 //   }
 // };
-// const performanceGenerator = async (req, res) => {
-//   try {
-//     const { email } = req.body;
-//     let mydata = {
-//       email: email,
-//       // jan: "",
-//       // feb: "",
-//       // mar: "",
-//       // apr: "",
-//       // may: "",
-//       // jun: "",
-//       // july: "",
-//       // aug: "",
-//       // sep: "",
-//       // oct: "",
-//       // nov: "",
-//       // dec: "",
-//     };
-//     let createNewPerformance = await performance.create(mydata);
-//     res.status(200).send({ message: "Performance created" });
-//   } catch (error) {
-//     res.status(400).send({ message: "Internal error" });
-//   }
-// };
+
 // const createPerformance = async (req, res) => {
 //   try {
 //     console.log(req.body);
@@ -297,20 +293,10 @@
 //     res.status(500).send({ message: "Internal error" });
 //   }
 // };
-// module.exports = {
-//   getAllEvent,
-//   getAllProject,
-//   updateHoliday,
-//   createEvent,
-//   getProjectByEmail,
-//   getEventByDate,
-//   createHoliday,
-//   getAllHoliday,
-//   createPerformance,
-//   getPerformanceByEmail,
-//   deleteHoliday,
-//   updateEvent,
-//   createProject,
-//   performanceGenerator,
+
+
+module.exports = {
+  createExpense,
+  getAllExpense
 //   deleteEvent,
-// };
+};
