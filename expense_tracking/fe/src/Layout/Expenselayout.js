@@ -6,7 +6,7 @@ import { ToastContainer } from "react-toastify";
 function ExpenseLayout() {
   return (
     <div className="sidebar-content-separation">
-      <Sidebar />
+      {/* <Sidebar /> */}
       <div className="content">
         <CheckLoginComponent />
         <Expenses />

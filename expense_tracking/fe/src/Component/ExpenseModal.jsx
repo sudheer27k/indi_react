@@ -45,15 +45,9 @@ function ExpenseModal({ isOpen, onClose, onSave }) {
               onChange={handleChange}
             />
           </Form.Group>
-          <Form.Group>
-            <Form.Label>Description</Form.Label>
-            <Form.Control
-              type="text"
-              name="description"
-              value={expense.description}
-              onChange={handleChange}
-            />
-          </Form.Group>
+          {/* 
+          
+           */}
           <Form.Group>
             <Form.Label>Amount</Form.Label>
             <Form.Control

@@ -2,19 +2,9 @@ var express = require("express");
 var router = express.Router();
 const dashboard = require("../models/Controller/dashboard");
 
-// router.post("/upcoming_event", dashboard.createEvent);
-// router.post("/upcoming_event/update", dashboard.updateEvent);
-// router.get("/upcoming_event/get", dashboard.getAllEvent);
-router.get("/getAllExpense", dashboard.getAllExpense);
-// router.get("/upcoming_project/:email", dashboard.getProjectByEmail);
-// router.get("/upcoming_event/get_by_date", dashboard.getEventByDate);
-// router.post("/public_holiday", dashboard.createHoliday);
+// router.get("/getAllExpense", dashboard.getAllExpense);
+router.get("/getUserExpense/:mail", dashboard.getUserExpense);
 router.post("/createExpense", dashboard.createExpense);
-// router.post("/create_performance", dashboard.createPerformance);
-// router.get("/public_holiday/get", dashboard.getAllHoliday);
-// router.post("/public_holiday/update", dashboard.updateHoliday);
-// router.get("/performance/:email", dashboard.getPerformanceByEmail);
-// router.post("/delete_event/:eventId", dashboard.deleteEvent);
-// router.post("/delete_holiday/:holidayId", dashboard.deleteHoliday);
-// router.post("/createProject", dashboard.createProject);
+router.post("/delete_expense/:expenseId", dashboard.deleteExpense);
+
 module.exports = router;
