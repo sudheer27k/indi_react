@@ -1,7 +1,7 @@
 module.exports = (sequelize, DataTypes) => {
     const  Expense= sequelize.define("expenses", {
       date: {
-        type: DataTypes.STRING,
+        type: DataTypes.DATEONLY,
       },
       // description: {
       //   type: DataTypes.STRING,

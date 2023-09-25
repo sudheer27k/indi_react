@@ -1,6 +1,6 @@
 const jwt = require("jsonwebtoken");
 const saltRound = 10;
-const secretKey = "boostisthesecretofmyenergy";
+const secretKey = "SHAKTHIMAN";
 
 const createToken = async ({ email, fullName, role }) => {
   let token = await jwt.sign({ email, fullName, role }, secretKey, {
@@ -22,7 +22,7 @@ const validate = async (req, res, next) => {
       if (myDecodeToken.role === "user") {
         next();
       } else {
-        res.status(400).send({ message: "Only JMAN employee can login" });
+        res.status(400).send({ message: "Only verified user can login" });
       }
     } else {
       res.status(400).send({ message: "Token is missing" });

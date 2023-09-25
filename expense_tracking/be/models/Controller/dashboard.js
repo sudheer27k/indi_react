@@ -3,6 +3,7 @@ const db = require("../Entity");
 const expense = db.expenses;
 // const userExpense = db.user_expenses;
 const users = db.users
+const { Op, Sequelize } = require('sequelize');
 
 
 
@@ -13,14 +14,14 @@ const getUserExpense = async (req, res) => {
     // Step 1: Fetch all expense_ids associated with the user
     const expenseDetails = await expense.findAll({
       where: {
-        email : User,
+        email: User,
       },
     });
 
     if (expenseDetails) {
       // Step 2: Map over the expenseDetails to extract specific properties
       const extractedExpenses = expenseDetails.map((expense) => ({
-        id : expense.dataValues.id,
+        id: expense.dataValues.id,
         date: expense.dataValues.date,
         amount: expense.dataValues.amount,
         category: expense.dataValues.category,
@@ -36,6 +37,27 @@ const getUserExpense = async (req, res) => {
     console.log(err);
   }
 };
+
+const getFiltered = async (req, res) => {
+  try {
+    console.log("filtered", req)
+    const email = req.body.email;
+    const month = req.body.month;
+    console.log(email,month,"filteredmonth")
+    let createfilterExpense = await expense.findAll({
+      where: {
+        [Op.and]: [
+          { email: { [Op.eq]: email } },
+          Sequelize.where(Sequelize.fn('MONTH', Sequelize.col('date')), month)
+      ]
+    }
+    });
+    res.status(200).send({ message: "Expense filtered" });
+  } catch (error) {
+    res.status(400).send({ message: "Internal error" });
+  }
+};
+
 //   }
 //     if (getExpense) {
 //     console.log(getExpense)
@@ -49,7 +71,6 @@ const getUserExpense = async (req, res) => {
 // };
 
 
-
 const createExpense = async (req, res) => {
   try {
     console.log("data", req.body)
@@ -59,7 +80,6 @@ const createExpense = async (req, res) => {
     res.status(400).send({ message: "Internal error" });
   }
 };
-
 
 const deleteExpense = async (req, res) => {
   console.log(req)
@@ -87,10 +107,11 @@ const deleteExpense = async (req, res) => {
 };
 
 
-module.exports = {
-  createExpense,
-  // getAllExpense,
-  getUserExpense,
-  deleteExpense,
-  // createUserExpense
-};
+  module.exports = {
+    getFiltered,
+    createExpense,
+    // getAllExpense,
+    getUserExpense,
+    deleteExpense,
+    // createUserExpense
+  };

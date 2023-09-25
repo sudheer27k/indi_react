@@ -40,7 +40,6 @@ export const UserExpenseDetails = async(mail) =>{
   .get(`${env.REACT_APP_API}/dashboard/getUserExpense/${mail}`)
 
   .then((res) => {
-    console.log(res,"service")
     return res;
   })
   .catch((error) => {
@@ -58,6 +57,19 @@ export const deleteExpense = async (expenseId) => {
       return error.response;
     });
   return deleteExpense;
+};
+
+export const  expensePerMonth = async (email) => {
+  let filterExpense = await axios
+    .post(`${env.REACT_APP_API}/dashboard/filterExpense`)
+    .then((res) => { 
+    console.log(res,"filter")
+    return res;
+    })
+    .catch((error) => {
+      return error.response;
+    });
+  return filterExpense;
 };
 
 // export const allocateExpenseToEachUser = async (email,exp_id) => {

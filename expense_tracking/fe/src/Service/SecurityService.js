@@ -30,7 +30,7 @@ export const CheckLoginComponent = () => {
               // return res;
             })
             .catch((error) => {
-              toast.error("Only employee can access", {
+              toast.error("Only user can access", {
                 autoClose: 2000,
               });
               setTimeout(() => {

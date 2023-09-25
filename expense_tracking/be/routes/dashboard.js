@@ -6,5 +6,6 @@ const dashboard = require("../models/Controller/dashboard");
 router.get("/getUserExpense/:mail", dashboard.getUserExpense);
 router.post("/createExpense", dashboard.createExpense);
 router.post("/delete_expense/:expenseId", dashboard.deleteExpense);
+router.post("/filterExpense", dashboard.getFiltered);
 
 module.exports = router;
