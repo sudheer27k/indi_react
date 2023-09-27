@@ -9,7 +9,6 @@ const { Op, Sequelize } = require('sequelize');
 
 const getUserExpense = async (req, res) => {
   let User = req.params.mail;
-  console.log(User, "this is user")
   try {
     // Step 1: Fetch all expense_ids associated with the user
     const expenseDetails = await expense.findAll({
@@ -28,7 +27,6 @@ const getUserExpense = async (req, res) => {
         isDelete: expense.dataValues.isDelete
       }));
 
-      console.log("start:", extractedExpenses, "Expenses list");
       res.send({ statusCode: 200, expenses: extractedExpenses });
     } else {
       res.status(400).send({ statusCode: 400, message: "No data" });
@@ -40,19 +38,28 @@ const getUserExpense = async (req, res) => {
 
 const getFiltered = async (req, res) => {
   try {
-    console.log("filtered", req)
-    const email = req.body.email;
-    const month = req.body.month;
-    console.log(email,month,"filteredmonth")
-    let createfilterExpense = await expense.findAll({
+    // console.log("filtered-req", req)
+    const email = req.query.email;
+    const month = parseInt(req.query.month);
+    console.log(email,typeof month,"filteredmonth")
+    const createfilterExpense = await expense.findAll({
       where: {
-        [Op.and]: [
-          { email: { [Op.eq]: email } },
-          Sequelize.where(Sequelize.fn('MONTH', Sequelize.col('date')), month)
+        email: email, // Filter by email
+        date: {
+          [Op.and]: [
+            Sequelize.where(Sequelize.fn('MONTH', Sequelize.col('date')), parseInt(month)), // Filter by month
+            
       ]
+      }
     }
     });
-    res.status(200).send({ message: "Expense filtered" });
+    if (createfilterExpense){
+      const expensesDataValues = createfilterExpense.map(expense => expense.dataValues);
+      console.log("newdata:",expensesDataValues)
+      res.status(200).send({ message: "Expense filtered" });
+    }else{
+      res.status(400).send({ statusCode: 400, message: "No data" });
+    } 
   } catch (error) {
     res.status(400).send({ message: "Internal error" });
   }

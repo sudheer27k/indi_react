@@ -59,9 +59,23 @@ export const deleteExpense = async (expenseId) => {
   return deleteExpense;
 };
 
-export const  expensePerMonth = async (email) => {
+export const  expensePerMonth = async (data) => {
   let filterExpense = await axios
-    .post(`${env.REACT_APP_API}/dashboard/filterExpense`)
+    // .get(`${env.REACT_APP_API}/dashboard/filterExpense`, {
+    //  params:{
+    //   email: data.email,
+    //   month: data.month
+    // }
+    .get(`${env.REACT_APP_API}/dashboard/filterExpense`, {
+      params: {
+        email: data.email,
+        month: data.month
+      },
+      headers: {
+        'Cache-Control': 'no-cache',
+        'Pragma': 'no-cache',
+      },
+    })
     .then((res) => { 
     console.log(res,"filter")
     return res;

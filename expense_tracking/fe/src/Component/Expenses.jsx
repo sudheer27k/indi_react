@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect,} from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { createnewExpense, UserExpenseDetails, deleteExpense ,expensePerMonth } from "../Service/ExpenseService";
+import { createnewExpense, UserExpenseDetails, deleteExpense, expensePerMonth } from "../Service/ExpenseService";
 import ExpenseModal from "../Component/ExpenseModal";
 import { confirmAlert } from "react-confirm-alert";
 import IconButton from "@mui/material/IconButton";
@@ -9,6 +9,7 @@ import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import LogoutIcon from "@mui/icons-material/Logout";
 import "../Component/Expenses.css";
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
 function Expenses() {
   let navigate = useNavigate();
@@ -27,9 +28,8 @@ function Expenses() {
     setExpenses([...expenses, newExpense]);
     const user_email = sessionStorage.getItem("user");
     newExpense["email"] = user_email;
-    console.log("New Expense:", newExpense);
-    console.log(user_email);
     let expense_response = await createnewExpense(newExpense);
+    console.log(expense_response, "adding expense")
   };
 
   const handleDeleteExpense = async (expenseId) => {
@@ -73,6 +73,50 @@ function Expenses() {
     return total;
   };
 
+  const data = [
+    {
+      name: 'Page A',
+      pv: 2400,
+      amt: 2400,
+    },
+    {
+      name: 'Page B',
+      pv: 1398,
+      amt: 2210,
+    },
+    {
+      name: 'Page C',
+
+      pv: 9800,
+      amt: 2290,
+    },
+    {
+      name: 'Page D',
+
+      pv: 3908,
+      amt: 2000,
+    },
+    {
+      name: 'Page E',
+
+      pv: 4800,
+      amt: 2181,
+    },
+    {
+      name: 'Page F',
+
+      pv: 3800,
+      amt: 2500,
+    },
+    {
+      name: 'Page G',
+
+      pv: 4300,
+      amt: 2100,
+    },
+  ];
+
+
   const loadData = async () => {
     let email = sessionStorage.getItem("user");
     if (email) {
@@ -98,9 +142,12 @@ function Expenses() {
   const chart_data = async (monthNumber) => {
     const data = {};
     data["email"] = sessionStorage.getItem("user");
-    data["month"] = selectedMonth;
+    data["month"] = parseInt(selectedMonth);
+    let expense_permonth = await expensePerMonth(data);
+
     console.log(data)
-    let expense_permonth = await expensePerMonth(data)
+    console.log(expense_permonth, "expense")
+
   }
 
   useEffect(() => {
@@ -185,7 +232,35 @@ function Expenses() {
           </div>
           <div className="total-expenses">
             <p>Total Expenses for {selectedMonth === "" ? "All Months" : `Month ${selectedMonth}`}: Rs {totalExpenses}</p>
+            
+            <LineChart
+              width={500}
+              height={300}
+              data={data}
+              margin={{
+                top: 5,
+                right: 30,
+                left: 20,
+                bottom: 5
+              }}
+            >
+              <CartesianGrid strokeDasharray="3 3" />
+              <XAxis dataKey="name" />
+              <YAxis />
+              <Tooltip />
+              <Legend />
+              <Line
+                type="monotone"
+                dataKey="pv"
+                stroke="#8884d8"
+                activeDot={{ r: 8 }}
+              />
+              <Line type="monotone" stroke="#82ca9d" />
+            </LineChart>
+    
           </div>
+          
+
         </div>
       </div>
 
@@ -201,6 +276,4 @@ function Expenses() {
 }
 
 export default Expenses;
-
-
 
