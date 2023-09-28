@@ -41,25 +41,41 @@ const getFiltered = async (req, res) => {
     // console.log("filtered-req", req)
     const email = req.query.email;
     const month = parseInt(req.query.month);
-    console.log(email,typeof month,"filteredmonth")
-    const createfilterExpense = await expense.findAll({
-      where: {
-        email: email, // Filter by email
-        date: {
-          [Op.and]: [
-            Sequelize.where(Sequelize.fn('MONTH', Sequelize.col('date')), parseInt(month)), // Filter by month
-            
-      ]
-      }
-    }
-    });
-    if (createfilterExpense){
+    console.log(email, typeof month, "filteredmonth")
+    // if ((month) <= 12) {
+      const createfilterExpense = await expense.findAll({
+        attributes: ['category', 'date', 'amount', 'isDelete'],
+        where: {
+          email: email, // Filter by email
+          date: {
+            [Op.and]: [
+              Sequelize.where(Sequelize.fn('MONTH', Sequelize.col('date')), parseInt(month)), // Filter by month     
+            ]
+          }
+        }
+      });
+    if (createfilterExpense) {
+    //     const expensesDataValues = createfilterExpense.map(expense => expense.dataValues);
+    //     console.log("newdata:", expensesDataValues)
+    //     res.status(200).send({ filteredexpenses: expensesDataValues });
+    //   } else {
+    //     res.status(400).send({ statusCode: 400, message: "No data" });
+    //   }
+    // } else {
+    //   const createfilterExpense = await expense.findAll({
+    //     attributes: ['category', 'date', 'amount', 'isDelete'],
+    //     where: {
+    //       email: email, // Filter by email
+    //     }
+    //   });
+    // }
+    // if (createfilterExpense) {
       const expensesDataValues = createfilterExpense.map(expense => expense.dataValues);
-      console.log("newdata:",expensesDataValues)
-      res.status(200).send({ message: "Expense filtered" });
-    }else{
+      console.log("newdata:", expensesDataValues)
+      res.status(200).send({ filteredexpenses: expensesDataValues });
+    }else {
       res.status(400).send({ statusCode: 400, message: "No data" });
-    } 
+    }
   } catch (error) {
     res.status(400).send({ message: "Internal error" });
   }
@@ -114,11 +130,11 @@ const deleteExpense = async (req, res) => {
 };
 
 
-  module.exports = {
-    getFiltered,
-    createExpense,
-    // getAllExpense,
-    getUserExpense,
-    deleteExpense,
-    // createUserExpense
-  };
+module.exports = {
+  getFiltered,
+  createExpense,
+  // getAllExpense,
+  getUserExpense,
+  deleteExpense,
+  // createUserExpense
+};

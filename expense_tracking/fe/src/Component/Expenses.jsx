@@ -23,6 +23,7 @@ function Expenses() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [totalExpenses, setTotalExpenses] = useState(0);
   const [selectedMonth, setSelectedMonth] = useState("");
+  const [filterdata,setfilterdata]=useState([]);
 
   const handleAddExpense = async (newExpense) => {
     setExpenses([...expenses, newExpense]);
@@ -73,48 +74,48 @@ function Expenses() {
     return total;
   };
 
-  const data = [
-    {
-      name: 'Page A',
-      pv: 2400,
-      amt: 2400,
-    },
-    {
-      name: 'Page B',
-      pv: 1398,
-      amt: 2210,
-    },
-    {
-      name: 'Page C',
+  // const data = [
+  //   {
+  //     name: 'Page A',
+  //     pv: 2400,
+  //     amt: 2400,
+  //   },
+  //   {
+  //     name: 'Page B',
+  //     pv: 1398,
+  //     amt: 2210,
+  //   },
+  //   {
+  //     name: 'Page C',
 
-      pv: 9800,
-      amt: 2290,
-    },
-    {
-      name: 'Page D',
+  //     pv: 9800,
+  //     amt: 2290,
+  //   },
+  //   {
+  //     name: 'Page D',
 
-      pv: 3908,
-      amt: 2000,
-    },
-    {
-      name: 'Page E',
+  //     pv: 3908,
+  //     amt: 2000,
+  //   },
+  //   {
+  //     name: 'Page E',
 
-      pv: 4800,
-      amt: 2181,
-    },
-    {
-      name: 'Page F',
+  //     pv: 4800,
+  //     amt: 2181,
+  //   },
+  //   {
+  //     name: 'Page F',
 
-      pv: 3800,
-      amt: 2500,
-    },
-    {
-      name: 'Page G',
+  //     pv: 3800,
+  //     amt: 2500,
+  //   },
+  //   {
+  //     name: 'Page G',
 
-      pv: 4300,
-      amt: 2100,
-    },
-  ];
+  //     pv: 4300,
+  //     amt: 2100,
+  //   },
+  // ];
 
 
   const loadData = async () => {
@@ -144,10 +145,11 @@ function Expenses() {
     data["email"] = sessionStorage.getItem("user");
     data["month"] = parseInt(selectedMonth);
     let expense_permonth = await expensePerMonth(data);
-
-    console.log(data)
     console.log(expense_permonth, "expense")
-
+    if (expense_permonth.status ===200){
+      setfilterdata(expense_permonth.data.filteredexpenses.filter((e) => e.isDelete === "0"));
+      console.log(filterdata,"console")
+    }
   }
 
   useEffect(() => {
@@ -158,8 +160,8 @@ function Expenses() {
     } else {
       setTotalExpenses(0);
     }
-    // chart_data();
-    // loadData();
+    chart_data();
+    loadData();
   }, [expenses, selectedMonth]);
 
   return (
@@ -215,7 +217,7 @@ function Expenses() {
               value={selectedMonth}
               onChange={(e) => setSelectedMonth(e.target.value)}
             >
-              <option value="">All Months</option>
+              {/* <option value="13">All Months</option> */}
               <option value="01">January</option>
               <option value="02">February</option>
               <option value="03">March</option>
@@ -234,9 +236,9 @@ function Expenses() {
             <p>Total Expenses for {selectedMonth === "" ? "All Months" : `Month ${selectedMonth}`}: Rs {totalExpenses}</p>
             
             <LineChart
-              width={500}
-              height={300}
-              data={data}
+              width={800}
+              height={500}
+              data={filterdata}
               margin={{
                 top: 5,
                 right: 30,
@@ -245,17 +247,12 @@ function Expenses() {
               }}
             >
               <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="name" />
+              <XAxis dataKey="category" />
               <YAxis />
               <Tooltip />
               <Legend />
-              <Line
-                type="monotone"
-                dataKey="pv"
-                stroke="#8884d8"
-                activeDot={{ r: 8 }}
-              />
-              <Line type="monotone" stroke="#82ca9d" />
+              <Line type="monotone" dataKey="amount" activeDot={{ r: 8 }}/>
+              <Line type="monotone" dataKey="categories" stroke="#82ca9d" />
             </LineChart>
     
           </div>
